@@ -4,6 +4,8 @@ Proyecto Semestral de la Asignatura de Ingeniería de Software I.
 
 Integrantes:
 
-Fabián González Uribe
-Martín Llanos Fariña
-Antonio Skorin Garciá
+ - Fabián González Uribe
+
+ - Martín Llanos Fariña
+
+ - Antonio Skorin García
