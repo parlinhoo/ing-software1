@@ -2,9 +2,9 @@
 
 RF1: El sistema web debe permitir al usuario de tipo “habitante” ingresar solicitudes de retiro de material reciclable a su domicilio, con validación de ubicación geográfica. (automática o previamente ingresada)
 
-RF2: El sistema debe emitir una lista de solicitudes de recolección que estén disponibles para ser aceptadas por recolectores, dentro de un área local alrededor del usuario recolector visualizada a través de un mapa.
+RF2: El sistema debe permitir ver una lista de solicitudes de recolección que estén disponibles para ser aceptadas por recolectores, dentro de un área local alrededor del usuario recolector visualizada a través de un mapa.
 
-RF3: El sistema debe generar y proporcionar una visualización de la ruta más corta entre los domicilios cuyas solicitudes fueron aceptadas por el usuario recolector.
+RF3: El sistema debe generar y permitir visualizar la ruta más corta entre los domicilios cuyas solicitudes fueron aceptadas por el usuario recolector.
 
 RF4: El sistema debe permitir a los usuarios ingresar y modificar datos personales relevantes para el funcionamiento de este. En el caso de “habitantes”, esto incluiría la dirección del domicilio, nombre, o detalles opcionales adicionales de la ubicación. En el caso de “recolectores”, esto incluiría la patente del vehículo y el nombre del conductor.
 
