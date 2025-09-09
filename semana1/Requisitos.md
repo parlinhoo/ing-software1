@@ -1,8 +1,8 @@
 ## Requisitos funcionales y no funcionales
 
-RF1: El sistema web debe permitir al usuario de tipo “habitante” ingresar solicitudes de retiro de material reciclable a su domicilio, con validación de ubicación geográfica. (automática o previamente ingresada)
+RF1: El sistema web debe permitir al usuario tipo “habitante” ingresar solicitudes de retiro de material reciclable a su domicilio, con validación de ubicación geográfica. (automática o previamente ingresada)
 
-RF2: El sistema debe permitir ver una lista de solicitudes de recolección que estén disponibles para ser aceptadas por recolectores, dentro de un área local alrededor del usuario recolector visualizada a través de un mapa.
+RF2: El sistema debe permitir a usuarios “Recolectores” seleccionar una o más solicitudes de recolección desde una lista de solicitudes disponibles para ser aceptadas dentro de un área local alrededor del usuario, visualizada a través de un mapa.
 
 RF3: El sistema debe generar y permitir visualizar la ruta más corta entre los domicilios cuyas solicitudes fueron aceptadas por el usuario recolector.
 
