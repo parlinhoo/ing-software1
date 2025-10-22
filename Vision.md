@@ -6,4 +6,4 @@ Se busca una solución que digitalice el proceso y permita una mejor coordinaci�
 
 ## Visión del producto
 
-Como el producto tiene que estar disponible para hogares, una página web es la opción más conveniente en este caso ya que permite compatibilidad con la gran mayoría de plataformas y no requiere actualización en tiempo real. En cuanto a los recolectores,  usarán una aplicación móvil ya que requieren un sistema dinámico que consume más recursos y permite la comunicación con clientes en tiempo real, en el cual puedan revisar sus pedidos pendientes, áreas asignadas y ruta de recolección a seguir.
+Como el producto tiene que estar disponible para hogares, una página web es la opción más conveniente en este caso ya que permite compatibilidad con la gran mayoría de plataformas y no requiere actualización en tiempo real. En cuanto a los recolectores,  usarán una aplicación móvil ya que requieren un sistema dinámico que consume más recursos y permite la comunicación con clientes en tiempo real, en el cual puedan revisar sus pedidos pendientes y ruta de recolección a seguir.
