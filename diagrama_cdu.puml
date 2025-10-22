@@ -4,38 +4,33 @@ left to right direction
 :Habitante:
 :Recolector:
 :API de Geolocalización: as api
+:Coordinador de ruta: as coordinador
 
 package Sistema {
-  usecase "Ingresar solicitud de retiro." as UC1
-  usecase "Confirmar ubicación (automáticamente o manualmente) y emitir solicitud." as UC2
-  usecase "Ingresar datos personales: nombre, dirección, teléfono." as UC3
-  usecase "Modificar datos." as UC4
-  usecase "Ver estado de solicitud de retiro." as UC5
-  usecase "Seleccionar 1 o más retiros para cumplir." as UC6
-  usecase "Visualizar retiros disponibles cercanos en un mapa." as UC7
-  usecase "Reportar completación de retiro." as UC8
-  usecase "Visualizar rutas de recolecciones." as UC9
-  usecase "Notificar habitante de la completación de su pedido." as UC10
+  usecase "Ingresar solicitud de retiro" as UC1
+  usecase "Validar ubicación automáticamente" as UC2
+  usecase "Ingresar o modificar datos personales" as UC3
+  usecase "Ver estado de solicitud de retiro" as UC4
+  usecase "Operar ruta asignada" as UC5
+  usecase "Visualizar ruta en un mapa" as UC6
+  usecase "Reportar resultado de retiro" as UC7
+  usecase "Emitir comprobante" as UC8
+	usecase "Agregar solicitud a zona de recolección" as UC9
+	usecase "Asignar ruta generada a recolector disponible" as UC10
+	usecase "Visualizar rutas en un mapa" as UC11
 }
 
 :UC1: --> :UC2: : <<include>>
-:UC1: --> :UC3: : <<include>>
-:UC6: --> :UC7: : <<include>
-:UC9: --> :UC6: : <<include>>
-:UC8: --> :UC6: : <<include>>
-:UC8: --> :UC10: : <<include>>
-
-
-:UC4: --> :UC3:: <<extend>>
-:UC5: --> :UC1:: <<extend>>
-
-
+:UC5: --> :UC6: : <<include>
+:UC5: --> :UC7: : <<include>>
+:UC7: --> :UC8: : <<include>>
+:UC2: --> :UC9: : <<extend>>
+:UC10: --> :UC11: : <<include>>
 
 :Habitante: -- UC1
 :Habitante: -- UC3
-:Recolector: -- UC6
-:Recolector: -- UC7
-:Recolector: -- UC8
-:Recolector: -- UC9
+:Habitante: -- UC4
+:Recolector: -- UC5
 :api: -- UC2
+:coordinador: -- UC10
 @enduml
