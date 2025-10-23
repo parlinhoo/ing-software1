@@ -1,0 +1,18 @@
+@startuml
+actor Habitante                 as Habitante
+participant Sistema             as Sistema
+actor "API Geolocalización"     as api_geo
+
+Habitante -> Sistema: Solicitud de pedido
+Sistema --> Habitante: ack
+
+loop "ubicación inválida"
+    Sistema -> Habitante: Abrir prompt para dirección
+    Habitante --> Sistema: ingresarDireccion(num_calle, nombre_calle, ciudad, region)
+    Sistema -> api_geo: validarUbicacion()
+    api_geo --> Sistema: return valResult
+end
+
+Sistema --> Habitante: Confirma solicitud exitosa
+
+@enduml
