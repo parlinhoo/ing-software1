@@ -1,0 +1,30 @@
+@startuml
+class Habitante {
+    + nombre
+    + RUT
+}            
+class Direccion {
+    + nombre_calle
+    + num_calle
+    + ciudad
+    + region
+}                
+class API_geo
+class Pedido {
+    + ID
+    + estado {En espera, En progreso, Cancelado, Terminado}
+    + fecha_hora
+}
+class Ruta
+class Recolector {
+    + nombre
+    + RUT
+}
+class CoordinadorDeRuta
+
+Habitante "1..*" -- "1..*" Direccion
+Direccion ..> API_geo
+Direccion "1" *-- "0..*" Pedido
+Pedido "1..*" -- "0..1" Ruta
+Ruta "1..1" -- "1..1" Recolector
+@enduml
