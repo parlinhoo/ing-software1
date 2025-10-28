@@ -3,16 +3,32 @@ actor Habitante                 as Habitante
 participant Sistema             as Sistema
 actor "API Geolocalización"     as api_geo
 
-Habitante -> Sistema: Solicitud de pedido
+Habitante -> Sistema: nuevaSolicitud()
 Sistema --> Habitante: ack
 
-loop "ubicación inválida"
-    Sistema -> Habitante: Abrir prompt para dirección
-    Habitante --> Sistema: ingresarDireccion(num_calle, nombre_calle, ciudad, region)
-    Sistema -> api_geo: validarUbicacion()
-    api_geo --> Sistema: return valResult
+loop "ubicación es inválida"
+    Habitante -> Sistema: ingresarDireccion(num_calle, nombre_calle, ciudad, region)
+    Sistema -> api_geo: validarDireccion()
+    api_geo --> Sistema: coordenadas
 end
 
-Sistema --> Habitante: Confirma solicitud exitosa
+Sistema -> Sistema: registrarPedido(habitante, coordenada, direccion)
+
+opt coordenadas no estan en una zona
+		Sistema -> Sistema: crearZonaRecoleccion()
+end
+
+opt no hay rutas cercanas para agregar pedido
+		Sistema -> Sistema: crearRuta()
+end
+
+Sistema -> Sistema: agregarPedido(zona, ruta)
+
+alt solicitud exitosa
+		Sistema -> Habitante: confirmarSolicitud()
+else error en registro
+		Sistema -> Habitante: errorSolicitud()
+end
+
 
 @enduml
