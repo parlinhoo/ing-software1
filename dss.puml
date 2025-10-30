@@ -32,7 +32,7 @@ alt "ubicación es válida"
 		Sistema -> Habitante: error de solicitud
 	end
 else "ubicación es inválida"
-	api_geo --> Sistema: error de coordenadas
+	api_geo --> Sistema: error de validación
 	Sistema -> Habitante: error de solicitud
 end
 
