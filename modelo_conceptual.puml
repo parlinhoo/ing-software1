@@ -23,6 +23,7 @@ class Pedido {
     + ID
     + estado {En espera, En progreso, Cancelado, Terminado}
     + fecha_hora
+    + coordenadas
 }
 class Ruta
 class Recolector {
