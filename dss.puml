@@ -5,30 +5,35 @@ actor "API Geolocalización"     as api_geo
 
 Habitante -> Sistema: nuevaSolicitud()
 Sistema --> Habitante: ack
+Habitante -> Sistema: ingresarDireccion(num_calle, nombre_calle, ciudad, region)
+Sistema -> api_geo: validarDireccion()
 
-loop "ubicación es inválida"
-    Habitante -> Sistema: ingresarDireccion(num_calle, nombre_calle, ciudad, region)
-    Sistema -> api_geo: validarDireccion()
-    api_geo --> Sistema: coordenadas
+alt "ubicación es válida"
+	api_geo --> Sistema: coordenadas
+	alt "ubicación está dentro de la zona de operación"
+		Sistema -> Sistema: registrarPedido(habitante, coordenada, direccion)
+		
+		opt "coordenadas no están en una zona de recolección"
+				Sistema -> Sistema: crearZonaRecoleccion()
+		end
+		
+		opt "no hay rutas cercanas para agregar pedido"
+				Sistema -> Sistema: crearRuta()
+		end
+		
+		Sistema -> Sistema: agregarPedido(zona, ruta)
+		
+		alt "registro exitoso"
+				Sistema -> Habitante: confirmación de solicitud
+		else "error en registro"
+				Sistema -> Habitante: error solicitud
+		end
+	else "ubicación no está en zona de operación"
+		Sistema -> Habitante: error de solicitud
+	end
+else "ubicación es inválida"
+	api_geo --> Sistema: error de coordenadas
+	Sistema -> Habitante: error de solicitud
 end
-
-Sistema -> Sistema: registrarPedido(habitante, coordenada, direccion)
-
-opt coordenadas no estan en una zona
-		Sistema -> Sistema: crearZonaRecoleccion()
-end
-
-opt no hay rutas cercanas para agregar pedido
-		Sistema -> Sistema: crearRuta()
-end
-
-Sistema -> Sistema: agregarPedido(zona, ruta)
-
-alt solicitud exitosa
-		Sistema -> Habitante: confirmarSolicitud()
-else error en registro
-		Sistema -> Habitante: errorSolicitud()
-end
-
 
 @enduml
