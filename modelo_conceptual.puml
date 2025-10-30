@@ -1,14 +1,23 @@
 @startuml
+
+hide empty methods
+skinparam linetype ortho
+hide empty fields
+skinparam legendBackgroundColor #ffffff
+
+
 class Habitante {
     + nombre
     + RUT
 }            
-class Direccion {
+class Dirección {
     + nombre_calle
     + num_calle
     + ciudad
     + region
-}                
+}
+
+class DirecciónHabitante                
 class API_geo
 class Pedido {
     + ID
@@ -21,10 +30,17 @@ class Recolector {
     + RUT
 }
 class CoordinadorDeRuta
+class ZonaDeRecolección
 
-Habitante "1..*" -- "1..*" Direccion
-Direccion ..> API_geo
-Direccion "1" *-- "0..*" Pedido
+Habitante "1" -- "1..*" DirecciónHabitante
+
+Dirección "1" -- "1..*" DirecciónHabitante
+
+DirecciónHabitante "1" --o "0..*" Pedido
+
+Dirección ..> API_geo
 Pedido "1..*" -- "0..1" Ruta
-Ruta "1..1" -- "1..1" Recolector
+Ruta "1" -- "1..1" Recolector
+CoordinadorDeRuta "1" -- "0..*" Ruta
+Pedido "0..*" --o "1" ZonaDeRecolección
 @enduml
