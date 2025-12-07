@@ -5,22 +5,22 @@ skinparam linetype ortho
 hide empty fields
 skinparam legendBackgroundColor #ffffff
 
-
 class Habitante {
     + nombre
     + RUT
-}            
+}
+class Hogar {
+    + ID_hogar
+}
 class Dirección {
     + nombre_calle
     + num_calle
     + ciudad
     + region
 }
-
-class DirecciónHabitante                
 class API_geo
 class Pedido {
-    + ID
+    + ID_pedido
     + estado {En espera, En progreso, Cancelado, Terminado}
     + fecha_hora
     + coordenadas
@@ -32,16 +32,28 @@ class Recolector {
 }
 class CoordinadorDeRuta
 class ZonaDeRecolección
+' Implementa el orden de los pickups en una ruta
+class Parada {
+    + orden
+}
 
-Habitante "1" -- "1..*" DirecciónHabitante
+Habitante "1..*" -- "1..*" Dirección
 
-Dirección "1" -- "1..*" DirecciónHabitante
+' Clase asociación, comunica explícitamente la asociación de un Pedido con un par específico de Habitante y Dirección
+(Habitante,Dirección) . Hogar
 
-DirecciónHabitante "1" --o "0..*" Pedido
+Hogar "1" -- "1..*" Pedido
 
 Dirección ..> API_geo
-Pedido "1..*" -- "0..1" Ruta
-Ruta "1" -- "1..1" Recolector
+
+Pedido "1..*" --o "1" Parada
+
+Parada "1..*" ---o "1" Ruta
+
+Ruta "1" -- "0..1" Recolector
+
 CoordinadorDeRuta "1" -- "0..*" Ruta
+
 Pedido "0..*" --o "1" ZonaDeRecolección
+
 @enduml
