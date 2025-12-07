@@ -11,14 +11,20 @@ Sistema -> api_geo: validarDireccion()
 alt "ubicación es válida"
 	api_geo --> Sistema: coordenadas
 	alt "ubicación está dentro de la zona de operación"
-		Sistema -> Sistema: registrarPedido(habitante, coordenada, direccion)
+	    Sistema -> Sistema: buscarHogar(habitante, dirección)
+	    
+	    opt "no existe registro de par habitante-dirección"
+	        Sistema -> Sistema: crearHogar(habitante, dirección)    
+	    end
+	   
+		Sistema -> Sistema: registrarPedido(hogar, coordenadas)
 		
 		opt "coordenadas no están en una zona de recolección"
-				Sistema -> Sistema: crearZonaRecoleccion()
+			Sistema -> Sistema: crearZonaRecoleccion()
 		end
 		
 		opt "no hay rutas cercanas para agregar pedido"
-				Sistema -> Sistema: crearRuta()
+			Sistema -> Sistema: crearRuta()
 		end
 		
 		Sistema -> Sistema: agregarPedido(zona, ruta)
@@ -26,7 +32,7 @@ alt "ubicación es válida"
 		alt "registro exitoso"
 				Sistema -> Habitante: confirmación de solicitud
 		else "error en registro"
-				Sistema -> Habitante: error solicitud
+				Sistema -> Habitante: error de solicitud
 		end
 	else "ubicación no está en zona de operación"
 		Sistema -> Habitante: error de solicitud
