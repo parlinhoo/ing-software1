@@ -1,0 +1,19 @@
+@startuml
+skinparam linestyle ortho
+hide empty members
+
+actor "Habitante" as user
+
+rectangle ":Habitante" as h
+collections ":Dirección" as ds
+rectangle "d:Dirección" as d
+
+user-right-> h: 1: ingresarDireccion(num_calle, nombre_calle, ciudad, region)
+
+h -down-> ds: 1.1: buscar(num_calle, nombre_calle, ciudad, region)
+
+h -right-> d: 1.2: [no existe]\ncrear(num_calle, nombre_calle, ciudad, region)
+
+h -down-> ds: 1.3: [no existe]\nagregar(d)
+
+@enduml
