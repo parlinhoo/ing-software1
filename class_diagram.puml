@@ -1,0 +1,90 @@
+@startuml
+
+hide empty methods
+skinparam linetype ortho
+hide empty fields
+skinparam legendBackgroundColor #ffffff
+
+class Habitante {
+    + nombre : String
+    + RUT : String
+    + direcciones : Vector<Direccion>
+    ingresarDireccion(calle: String,num_calle: int,ciudad: String,region: String)
+}
+class Hogar {
+    + ID_hogar : int
+}
+class Dirección {
+    + nombre_calle : String
+    + num_calle : int
+    + ciudad : String
+    + region : String
+    crear()
+}
+class API_geo {
+    validarDireccion(d: Direccion)
+}
+class Pedido {
+    + ID_pedido : int
+    + estado : String
+    + fecha_hora : DateTime
+    + coordenadas : GeographicCoordinate
+    crear()
+    setEstado(e: String)
+}
+class Ruta {
+    + paradas : Vector<Parada>
+}
+class Recolector {
+    + nombre : String
+    + RUT : String
+}
+class CoordinadorDeRuta {
+    asignarRuta(rec: Recolector, rut: Ruta)
+}
+class ZonaDeRecolección {
+    + pedidos : Vector<Pedido>
+}
+' Implementa el orden de los pickups en una ruta
+class Parada {
+    + orden : int
+    + pedidos : Vector<Pedido>
+}
+
+' Congntrolglelrlr
+class ControladorPedidos {
+    + ListaHogares : Vector<Hogar>
+    + ListaPedidos : Vector<Pedido>
+    registrarPedido(h: Habitante, d: Direccion, c: GeographicCoordinate)
+}
+
+' Posee visibilidad de Direccion debido a que se realizan búsquedas en una lista de direcciones asociadsa
+Habitante "1..*" o--> "1..*" Dirección
+
+' Clase asociación, comunica explícitamente la asociación de un Pedido con un par específico de Habitante y Dirección
+(Habitante,Dirección) . Hogar
+
+Hogar "1" <-- "1..*" Pedido
+
+Dirección ..> API_geo : "<<use>>"
+
+Pedido "1..*    " <--o "1" Parada
+
+Parada "1..*  " <---o "1" Ruta
+
+Ruta "1" <-- "0..1" Recolector
+
+CoordinadorDeRuta "1" --> "0..*" Ruta
+
+' Agregado en Diagrama cLase, supongo que es necesario para asignar rutas...
+CoordinadorDeRuta "1" --> "0..*" Recolector
+
+Pedido "0..*" <--o "1" ZonaDeRecolección
+
+' Controllers
+ControladorPedidos "1..1" --> "0..*" Hogar
+ControladorPedidos "1..1" --> "0..*" Pedido
+ControladorPedidos ..> Habitante : "<<use>>"
+ControladorPedidos ..> Dirección : "<<use>>"
+
+@enduml
