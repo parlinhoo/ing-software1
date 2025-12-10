@@ -22,7 +22,7 @@ class Dirección {
     crear()
 }
 class API_geo {
-    validarDireccion(d: Direccion)
+    validarDireccion(calle: String,num_calle: int, ciudad: String,region: String)
 }
 class Pedido {
     + ID_pedido : int
